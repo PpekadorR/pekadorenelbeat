@@ -1,96 +1,137 @@
-body{
-margin:0;
-background:#0a0a0a;
-color:white;
-font-family:Arial;
+const wavesurfer = WaveSurfer.create({
+  container: '#waveform',
+  waveColor: '#444',
+  progressColor: '#1db954',
+  height: 80
+})
+
+const playBtn = document.getElementById("play")
+const title = document.getElementById("title")
+const time = document.getElementById("time")
+const volume = document.getElementById("volume")
+const cover = document.getElementById("cover")
+
+const tracks = [
+{
+title:"West Coast Type Beat",
+src:"beats/beat1.mp3",
+cover:"cover.jpg",
+bpm:90,
+genre:"West Coast"
+},
+{
+title:"Boom Bap Beat",
+src:"beats/beat2.mp3",
+cover:"cover.jpg",
+bpm:85,
+genre:"Boom Bap"
+},
+{
+title:"Trap Beat",
+src:"beats/beat3.mp3",
+cover:"cover.jpg",
+bpm:140,
+genre:"Trap"
+}
+]
+
+let current = 0
+
+function loadTrack(i){
+current = i
+wavesurfer.load(tracks[i].src)
+title.innerText = tracks[i].title
+cover.src = tracks[i].cover
 }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
+playBtn.onclick = () => {
+wavesurfer.playPause()
+updatePlayBtn()
 }
 
-.player{
-background:#111;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+function updatePlayBtn(){
+playBtn.innerText = wavesurfer.isPlaying() ? "⏸" : "▶"
 }
 
-.player img{
-width:100%;
-border-radius:10px;
+wavesurfer.on('ready', updateTime)
+wavesurfer.on('audioprocess', updateTime)
+wavesurfer.on('finish', nextTrack)
+
+function updateTime(){
+let c = wavesurfer.getCurrentTime()
+let d = wavesurfer.getDuration()
+time.innerText = format(c) + " / " + format(d)
 }
 
-.info{
-display:flex;
-justify-content:space-between;
-margin-top:10px;
+function format(sec){
+let m = Math.floor(sec/60)
+let s = Math.floor(sec%60)
+if(s<10) s="0"+s
+return m+":"+s
 }
 
-#waveform{
-margin:20px 0;
+function nextTrack(){
+current = (current + 1) % tracks.length
+loadTrack(current)
+wavesurfer.play()
+updatePlayBtn()
 }
 
-.controls{
-display:flex;
-align-items:center;
-gap:15px;
+volume.oninput = () => {
+wavesurfer.setVolume(volume.value)
 }
 
-button{
-background:#1db954;
-border:none;
-padding:10px 15px;
-border-radius:20px;
-color:white;
-cursor:pointer;
+function shareTrack(track){
+const url = window.location.href + "?track=" + encodeURIComponent(track.title)
+
+navigator.clipboard.writeText(url)
+alert("Link copiado 🔗")
 }
 
-.volume-box{
-display:flex;
-align-items:center;
-gap:5px;
+function renderList(){
+const list = document.getElementById("tracklist")
+list.innerHTML = ""
+
+tracks.forEach((t,i)=>{
+
+const div = document.createElement("div")
+div.className="track"
+
+div.innerHTML = `
+<div class="track-left">
+<strong>${t.title}</strong><br>
+<span>${t.genre} • ${t.bpm} BPM</span>
+</div>
+
+<div class="track-right">
+<button class="icon-btn play-btn">▶</button>
+<button class="icon-btn share-btn">🔗</button>
+</div>
+`
+
+// PLAY INDIVIDUAL
+div.querySelector(".play-btn").onclick = () => {
+loadTrack(i)
+wavesurfer.play()
+updatePlayBtn()
 }
 
-#volume{
-width:100px;
+// CLICK EN TRACK
+div.querySelector(".track-left").onclick = () => {
+loadTrack(i)
+wavesurfer.play()
+updatePlayBtn()
 }
 
-#tracklist{
-margin-top:20px;
+// SHARE
+div.querySelector(".share-btn").onclick = () => {
+shareTrack(t)
 }
 
-.track{
-padding:15px;
-border-bottom:1px solid #222;
-display:flex;
-justify-content:space-between;
-align-items:center;
+list.appendChild(div)
+
+})
 }
 
-.track:hover{
-background:#1a1a1a;
-}
-
-.track-left{
-cursor:pointer;
-}
-
-.track-right{
-display:flex;
-gap:10px;
-}
-
-.icon-btn{
-background:#222;
-border:none;
-padding:8px 10px;
-border-radius:10px;
-cursor:pointer;
-}
-
-.icon-btn:hover{
-background:#333;
-}
+renderList()
+loadTrack(0)
