@@ -13,24 +13,59 @@ const cover = document.getElementById("cover")
 
 const tracks = [
 {
-title:"West Coast Type Beat",
+title:"Akwid Type",
 src:"beats/beat1.mp3",
 cover:"cover.jpg",
-bpm:90,
-genre:"West Coast"
-},
-{
-title:"Boom Bap Beat",
-src:"beats/beat2.mp3",
-cover:"cover.jpg",
-bpm:85,
+bpm:94,
 genre:"Boom Bap"
 },
 {
-title:"Trap Beat",
+title:"Melancholiah",
+src:"beats/beat8.mp3",
+cover:"cover.jpg",
+bpm:87,
+genre:"Boom Bap"
+},
+{
+title:"Silent Pain",
+src:"beats/beat2.mp3",
+cover:"cover.jpg",
+bpm:90,
+genre:"Boom Bap"
+}
+{
+title:"The Low End Swamp",
 src:"beats/beat3.mp3",
 cover:"cover.jpg",
-bpm:140,
+bpm:86,
+genre:"Boom Bap"
+}
+{
+title:"Ghost Chords",
+src:"beats/beat5.mp3",
+cover:"cover.jpg",
+bpm:89,
+genre:"Boom Bap"
+}
+{
+title:"Key Pressure",
+src:"beats/beat6.mp3",
+cover:"cover.jpg",
+bpm:89,
+genre:"Boom Bap"
+}
+{
+title:"Flow 2000",
+src:"beats/beat4.mp3",
+cover:"cover.jpg",
+bpm:95,
+genre:"Reggaeton"
+}
+{
+title:"Heart in 808",
+src:"beats/beat7.mp3",
+cover:"cover.jpg",
+bpm:143,
 genre:"Trap"
 }
 ]
