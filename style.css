@@ -1,172 +1,108 @@
-const wavesurfer = WaveSurfer.create({
-  container: '#waveform',
-  waveColor: '#444',
-  progressColor: '#1db954',
-  height: 80
-})
-
-const playBtn = document.getElementById("play")
-const title = document.getElementById("title")
-const time = document.getElementById("time")
-const volume = document.getElementById("volume")
-const cover = document.getElementById("cover")
-
-const tracks = [
-{
-title:"Akwid Type",
-src:"beats/beat1.mp3",
-cover:"cover.jpg",
-bpm:94,
-genre:"Boom Bap"
-},
-{
-title:"Melancholiah",
-src:"beats/beat8.mp3",
-cover:"cover.jpg",
-bpm:87,
-genre:"Boom Bap"
-},
-{
-title:"Silent Pain",
-src:"beats/beat2.mp3",
-cover:"cover.jpg",
-bpm:90,
-genre:"Boom Bap"
-}
-{
-title:"The Low End Swamp",
-src:"beats/beat3.mp3",
-cover:"cover.jpg",
-bpm:86,
-genre:"Boom Bap"
-}
-{
-title:"Ghost Chords",
-src:"beats/beat5.mp3",
-cover:"cover.jpg",
-bpm:89,
-genre:"Boom Bap"
-}
-{
-title:"Key Pressure",
-src:"beats/beat6.mp3",
-cover:"cover.jpg",
-bpm:89,
-genre:"Boom Bap"
-}
-{
-title:"Flow 2000",
-src:"beats/beat4.mp3",
-cover:"cover.jpg",
-bpm:95,
-genre:"Reggaeton"
-}
-{
-title:"Heart in 808",
-src:"beats/beat7.mp3",
-cover:"cover.jpg",
-bpm:143,
-genre:"Trap"
-}
-]
-
-let current = 0
-
-function loadTrack(i){
-current = i
-wavesurfer.load(tracks[i].src)
-title.innerText = tracks[i].title
-cover.src = tracks[i].cover
+body{
+margin:0;
+background:#0a0a0a;
+color:white;
+font-family:Arial;
 }
 
-playBtn.onclick = () => {
-wavesurfer.playPause()
-updatePlayBtn()
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
 }
 
-function updatePlayBtn(){
-playBtn.innerText = wavesurfer.isPlaying() ? "⏸" : "▶"
+.player{
+background:#111;
+padding:20px;
+border-radius:15px;
+margin-bottom:25px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
-wavesurfer.on('ready', updateTime)
-wavesurfer.on('audioprocess', updateTime)
-wavesurfer.on('finish', nextTrack)
-
-function updateTime(){
-let c = wavesurfer.getCurrentTime()
-let d = wavesurfer.getDuration()
-time.innerText = format(c) + " / " + format(d)
+.player img{
+width:100%;
+border-radius:10px;
 }
 
-function format(sec){
-let m = Math.floor(sec/60)
-let s = Math.floor(sec%60)
-if(s<10) s="0"+s
-return m+":"+s
+.info{
+display:flex;
+justify-content:space-between;
+color:#ccc;
+margin-top:10px;
 }
 
-function nextTrack(){
-current = (current + 1) % tracks.length
-loadTrack(current)
-wavesurfer.play()
-updatePlayBtn()
+#waveform{
+margin:20px 0;
 }
 
-volume.oninput = () => {
-wavesurfer.setVolume(volume.value)
+.controls{
+display:flex;
+align-items:center;
+gap:15px;
 }
 
-function shareTrack(track){
-const url = window.location.href + "?track=" + encodeURIComponent(track.title)
-
-navigator.clipboard.writeText(url)
-alert("Link copiado 🔗")
+button{
+background:#1db954;
+border:none;
+padding:10px 15px;
+border-radius:20px;
+color:white;
+cursor:pointer;
 }
 
-function renderList(){
-const list = document.getElementById("tracklist")
-list.innerHTML = ""
-
-tracks.forEach((t,i)=>{
-
-const div = document.createElement("div")
-div.className="track"
-
-div.innerHTML = `
-<div class="track-left">
-<strong>${t.title}</strong><br>
-<span>${t.genre} • ${t.bpm} BPM</span>
-</div>
-
-<div class="track-right">
-<button class="icon-btn play-btn">▶</button>
-<button class="icon-btn share-btn">🔗</button>
-</div>
-`
-
-// PLAY INDIVIDUAL
-div.querySelector(".play-btn").onclick = () => {
-loadTrack(i)
-wavesurfer.play()
-updatePlayBtn()
+.volume-box{
+display:flex;
+align-items:center;
+gap:5px;
 }
 
-// CLICK EN TRACK
-div.querySelector(".track-left").onclick = () => {
-loadTrack(i)
-wavesurfer.play()
-updatePlayBtn()
+#tracklist{
+margin-top:10px;
 }
 
-// SHARE
-div.querySelector(".share-btn").onclick = () => {
-shareTrack(t)
+.track{
+background:#111;
+padding:15px;
+border-radius:10px;
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:0.2s;
 }
 
-list.appendChild(div)
-
-})
+.track:hover{
+background:#1a1a1a;
 }
 
-renderList()
-loadTrack(0)
+.track.active{
+border:1px solid #1db954;
+background:#1db95422;
+}
+
+.track-left span{
+color:#888;
+font-size:12px;
+}
+
+.track-right{
+display:flex;
+gap:8px;
+}
+
+.icon-btn{
+background:#222;
+border:none;
+padding:8px 10px;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+.buy-btn{
+background:#1db954;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
