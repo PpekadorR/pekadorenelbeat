@@ -14,25 +14,52 @@ const cover = document.getElementById("cover")
 
 const tracks = [
 {
-title:"West Coast Type Beat",
-src:"beats/beat1.mp3",
-cover:"cover.jpg",
-bpm:90,
-genre:"West Coast"
+title:"Akwid Type",
+meta:"94 BPM • G Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat1.mp3"
 },
 {
-title:"Boom Bap Beat",
-src:"beats/beat2.mp3",
-cover:"cover.jpg",
-bpm:85,
-genre:"Boom Bap"
+title:"Melancholiah",
+meta:"87 BPM • C Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat8.mp3"
 },
 {
-title:"Trap Beat",
-src:"beats/beat3.mp3",
-cover:"cover.jpg",
-bpm:140,
-genre:"Trap"
+title:"Silent Pain",
+meta:"90 BPM • B Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat2.mp3"
+},
+{
+title:"The Low End Swamp",
+meta:"86 BPM • F# Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat3.mp3"
+},
+{
+title:"Ghost Chords",
+meta:"89 BPM • F# Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat5.mp3"
+},
+{
+title:"Key Pressure",
+meta:"89 BPM • E Minor • Boom Bap",
+genre:"Rap",
+src:"beats/beat6.mp3"
+},
+{
+title:"Flow 2000",
+meta:"95 BPM • F Minor • Reggaeton",
+genre:"Reggaeton",
+src:"beats/beat4.mp3"
+},
+{
+title:"Heart in 808",
+meta:"143 BPM • B Major • Trap",
+genre:"Trap",
+src:"beats/beat7.mp3"
 }
 ]
 
