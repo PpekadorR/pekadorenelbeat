@@ -6,7 +6,7 @@ font-family:Arial;
 }
 
 .container{
-max-width:800px;
+max-width:900px;
 margin:auto;
 padding:20px;
 }
@@ -26,7 +26,6 @@ border-radius:10px;
 .info{
 display:flex;
 justify-content:space-between;
-align-items:center;
 margin-top:10px;
 }
 
@@ -37,7 +36,7 @@ margin:20px 0;
 .controls{
 display:flex;
 align-items:center;
-gap:10px;
+gap:15px;
 }
 
 button{
@@ -47,11 +46,16 @@ padding:10px 15px;
 border-radius:20px;
 color:white;
 cursor:pointer;
-font-size:16px;
 }
 
-button:hover{
-background:#17a74a;
+.volume-box{
+display:flex;
+align-items:center;
+gap:5px;
+}
+
+#volume{
+width:100px;
 }
 
 #tracklist{
@@ -63,14 +67,30 @@ padding:15px;
 border-bottom:1px solid #222;
 display:flex;
 justify-content:space-between;
-cursor:pointer;
+align-items:center;
 }
 
 .track:hover{
 background:#1a1a1a;
 }
 
-.track span{
-color:#aaa;
-font-size:12px;
+.track-left{
+cursor:pointer;
+}
+
+.track-right{
+display:flex;
+gap:10px;
+}
+
+.icon-btn{
+background:#222;
+border:none;
+padding:8px 10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.icon-btn:hover{
+background:#333;
 }
