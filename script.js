@@ -29,6 +29,14 @@ genre:"Boom Bap",
 price:"$35"
 },
 {
+title:"Strings in the Shadows",
+src:"beats/beat9.mp3",
+cover:"cover.jpg",
+bpm:72,
+genre:"Boom Bap",
+price:"$35"
+},
+{
 title:"Silent Pain",
 src:"beats/beat2.mp3",
 cover:"cover.jpg",
