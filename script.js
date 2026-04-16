@@ -45,6 +45,14 @@ genre:"Boom Bap",
 price:"$30"
 },
 {
+title:"Villa Flow Session",
+src:"beats/beat10.mp3",
+cover:"cover.jpg",
+bpm:90,
+genre:"Boom Bap",
+price:"$25"
+},
+{
 title:"The Low End Swamp",
 src:"beats/beat3.mp3",
 cover:"cover.jpg",
